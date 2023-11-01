@@ -1,0 +1,159 @@
+import 'dart:io';
+
+void main(){
+	List<Map<String, dynamic>> teams = [];
+
+	stdout.write("\x1B[47m\x1B[90m Enter 'Run' to start the Application > \x1B[0m");
+		String clickToStart = stdin.readLineSync() ?? "";
+		if(!clickToStart.contains(RegExp(r'[Run]'))){
+	 print("\x1B[31m Please Enter 'Run' to start the application.\x1B[0m");
+			return;
+		}
+	
+print("———————————————————————————————————");
+print("\x1B[30m\x1B[1m SignUp your Account  \x1B[0m");
+print("———————————————————————————————————");
+		stdout.write(" Enter First Name: ");
+		String firstName = stdin.readLineSync() ?? "";
+
+		if (firstName.length < 3 && firstName.length > 10) {
+			print("\x1B[31m First Name must be greater than 3 and less than 10 character.\x1B[0m");
+			return;
+		}
+		if(!firstName.contains(RegExp(r'[ABCDEFGHIJKLMNOPQRSTUVWXYZ]'))) {
+			print("\x1B[31m First Name must be use one capital alphabet.\x1B[0m");
+			return;
+		}
+
+		stdout.write(" Enter Last Name: ");
+		String lastName = stdin.readLineSync() ?? "";
+
+		if (lastName.length < 4 && lastName.length > 10) {
+			print("\x1B[31m First Name must be greater than 3 and less than 10 character.\x1B[0m");
+			return;
+		}
+
+		if(!lastName.contains(RegExp(r'[ABCDEFGHIJKLMNOPQRSTUVWXYZ]'))) {
+			print("\x1B[31m Last Name must be use one capital alphabet.\x1B[0m");
+			return;
+		}
+
+		stdout.write(" Enter Email: ");
+		String email = stdin.readLineSync() ?? "";
+
+		if (!email.contains(RegExp(r'[@]'))) {
+			print("\x1B[31m Email must be use @ character.\x1B[0m");
+			return;
+		}
+	 if (email.length < 8 && email.length > 22){
+		 print("\x1B[31m email must be greater than 8 and less than 22.\x1B[0m");
+		 return;
+	 }
+		stdout.write(" Enter Password: ");
+		String password = stdin.readLineSync() ?? "";
+
+		if (!password.contains(RegExp(r'[!-.:~@#\$%^&*()_+]'))) {
+			print("\x1B[31m Password must contain at least one special character.\x1B[0m");
+			return;
+		}
+		else if (!password.contains(RegExp(r'[0123456789]'))){
+			print("\x1B[31m Password must contain at least one integer character.\x1B[0m");
+				return;
+			}
+		stdout.write(" Enter Confirm Password: ");
+		String confirmPassword = stdin.readLineSync() ?? "";
+
+		if(!password.contains(RegExp(confirmPassword))){
+			print("\x1B[31m Password has not matched.\x1B[0m");
+			return;
+		}
+		print("\x1B[32m\x1B[1m SignUp Successfully!\x1B[0m\x1B[0m");
+print("———————————————————————————————————");
+print("\x1B[30m\x1B[1m Login your Account \x1B[0m");
+print("———————————————————————————————————");
+
+
+		stdout.write(" Enter User Name: ");
+		String username = stdin.readLineSync() ?? "";
+		if (username.length < 6){
+			print("\x1B[31m username must be greater than 6 characters.\x1B[0m");
+		}
+
+		stdout.write(" Enter Email: ");
+			String email1 = stdin.readLineSync() ?? "";
+
+			if (!email1.contains(RegExp(email))) {
+				print("\x1B[31m Email has not matched.\x1B[0m");
+				return;
+			}
+
+			stdout.write(" Enter Password: ");
+			String password1 = stdin.readLineSync() ?? "";
+
+			if (!password1.contains(RegExp(confirmPassword))) {
+				print("\x1B[31m Password has not matched.\x1B[0m");
+				return;
+			}
+
+			print("\x1B[32m\x1B[1m Login Successfully!\x1B[0m\x1B[0m Welcome $username.");
+print("———————————————————————————————————");
+	while(true){
+		print("\x1B[33m\x1B[1m GULLY CRICKET TEAM \x1B[0m\x1B[0m");
+print("———————————————————————————————————");
+    print(" 1. Add Team");
+		print(" 2. View Team");
+		print(" 3. Exit Team");
+		stdout.write(" Enter your Choice 1/2/3 - ");
+		
+		String choice = stdin.readLineSync()!;
+
+		switch(choice){
+			case '1':
+				addTeam(teams);
+				break;
+			case '2':
+				viewTeam(teams);
+				break;
+			case '3':
+				print("\n\x1B[31m You can leave the team.\x1B[0m\n");
+				break;
+			default:
+				print("\x1B[31m Inavlid choice Selected!\x1B[0m\n");
+		}
+	}
+}
+
+void addTeam(List<Map<String, dynamic >> teams){
+	stdout.write("\nEnter Player Name: ");
+	String name = stdin.readLineSync()!;
+
+	stdout.write("Enter Player Information: ");
+	String info = stdin.readLineSync()!;
+
+	stdout.write("Enter Player Age: ");
+	int age = int.parse(stdin.readLineSync()!);
+
+	stdout.write("Enter Last Inning date: ");
+	String date = stdin.readLineSync()!;
+
+	teams.add({"Name": name, "Information":info,"Age":age,"Date":date});
+
+	print("\n\x1B[32mPlayer Has been Added in Team.\x1B[0m\n");
+
+}
+
+void viewTeam(List<Map<String, dynamic >> teams){
+	
+	if(teams.isEmpty){
+		print("\x1B[31m No Players in Team.\x1B[0m\n");
+	}
+	else{
+		for(var team in teams){	print("———————————————————————————————————");
+			print("\x1B[34m\x1B[3m\n PLAYER IN TEAM\x1B[0m\x1B[0m");
+			print('\x1B[1m Name: ${team["Name"]}\x1B[0m');
+			print('\x1B[1m Information: ${team["Information"]}\x1B[0m');
+			print('\x1B[1m Age: ${team["Age"]}\x1B[0m');
+			print('\x1B[1m Date: ${team["Date"]}\x1B[0m\n');									print("———————————————————————————————————");
+		}
+	}
+}
